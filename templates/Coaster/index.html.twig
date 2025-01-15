@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{#modifie le titre de la page#}
+{% block title %}Home - {{parent() }} {% endblock %}
+
+{% block body %}
+<h1>YO DAYO !</h1>
+<a href="#" class="btn btn-primary">Connectez-vous</a>
+
+<div class="d-flex justify-content-between flex wrap">
+<h1>Liste des coasters</h1>
+<form action="" method="get" class="d-flex">
+    <input type="search" name="search" class="form-control" placeholder="rechercher..." value="{{app.request.get('search')}}">
+    <select name="park" class"form-select">
+        <option value="">Tous les parks</option>
+        {% for park in parks %}
+        <option value="{{ park.id }}" {% if park.id == app.request.get('park')%}selected {% endif %}>{{ park.name }}</option>
+        {% endfor %}
+    </select>
+
+    <select name="category" class"form-select">
+        <option value="">Toues les catégories</option>
+        {% for category in categories %}
+        <option value="{{ category.id }}" {% if category.id == app.request.get('category')%}selected {% endif %}>{{ category.name }}</option>
+        {% endfor %}
+
+    </select>
+    <button type="submit" class="btn btn-outline-secondary ms1">filtrer</button>
+</form>
+
+</div>
+{% for coaster in coasters %}
+<div class="card my-2">
+    <div class="card-body">
+        <div class="lead">{{coaster.name}} </div>
+        <div class="infos" d-flex>
+            <div class="mx-2">
+                Hauteur: {{ coaster.maxHeight }}
+            </div>
+            <div class="mx-2">
+                Longueur: {{ coaster.length }}
+            </div>
+            <div class="mx-2">
+                Vitesse: Max {{ coaster.maxSpeed }}
+            </div>
+            <div class="mx-2">
+                Categrories: 
+                    {% for category in coaster.categories %}
+                        <span class="badge" style="background-color:{{ category.color }}">
+                            {{ category.name }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <a href="{{path('app_coaster_edit', {'id': coaster.id}) }}" class="btn btn-secondary">Modifier</a>
+        <a href="{{path('app_coaster_delete', {'id': coaster.id}) }}" class="btn btn-danger">Suprimer</a>
+    </div>
+</div>
+
+{% endfor %}
+{% include "utils/_pagination.html.twig" with {'route' : 'app_coaster_index'} %}
+{% endblock %}

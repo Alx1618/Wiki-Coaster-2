@@ -1,0 +1,28 @@
+$enable-rounded: false;
+$primary: rgb(78, 8, 93);
+$enable-gradients: true;
+$gradient: rgb(30, 30, 127);
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../node_modules/bootstrap-icons/font/bootstrap-icons.scss';
+main {
+    min-height: 100vh;
+    background-image: radial-gradient(circle at top right, rgb(36, 9, 119) 0%, rgb(36, 9, 119) 48%, rgb(72, 7, 149) 48%, rgb(72, 7, 149) 53%, rgb(109, 5, 178) 53%, rgb(109, 5, 178) 56%, rgb(145, 2, 208) 56%, rgb(145, 2, 208) 69%, rgb(181, 0, 237) 69%, rgb(181, 0, 237) 100%);
+}
+
+#side-menu {
+    width: 240px;
+    background: var(--bs-tertiary-bg);
+    .lead {
+        color: white;
+        background-color: $primary;
+        font-weight: bold;
+        text-align: center;
+    }
+}
+
+#main-content {
+    background: rgba(var(--bs-tertiary-bg-rgb), 65%);
+    padding: 1em;
+    border-radius: var(--bs-border-radius);
+    border: var(--bs-border-color) solid 1px;
+}
